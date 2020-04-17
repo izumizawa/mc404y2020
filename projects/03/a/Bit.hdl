@@ -15,4 +15,10 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
+    // ()   ()   
+    // ( @ . @) /* 
+    // (  () ) /
+    Mux(a=saidinha, b=in, sel=load, out=saida);
+    DFF(in=saida, out=saidinha);
+    And(a=saidinha, b=saidinha, out=out);
 }
