@@ -16,47 +16,61 @@
 // ( @ . @) /* 
 // (  () ) /
 
-(LOOP)
-@16834
+@24576
 D=A
-@tela
+@variavel
 M=D
-	@KDB // Keyboard
+(LOOP)
+	@KBD // Keyboard
 	D=M
 	@BRANCO
 	D;JEQ // Jump to whitening condition
-	@PRETO
-	0;JMP // Else Jump to blackning condition
-(BRANCO)
-	@tela
-	A=M
-	D=M
-	@24575
-	D=A-D
-	@FORA
-	D;JLE
-	@tela
-	A=M
-	M=0 // "White" pixel
-	@tela
-	M=M+1
-	@BRANCO
-	0;JMP // Back to white loop
+
 (PRETO)
-	@tela
-	A=M
+@16384
+D=A
+@i
+M=D
+
+(LOOP3)
+	@i
 	D=M
-	@24575
-	D=A-D
+	@variavel
+	D=M-D // D=24576-16384=8192
 	@FORA
 	D;JLE
-	@tela
+
+	@i
 	A=M
 	M=-1 // "Black" pixel
-	@tela
+	@i
 	M=M+1
-	@PRETO
+	@LOOP3
 	0;JMP // Back to white loop
+
+(BRANCO)
+@16384
+D=A
+@i
+M=D
+
+(LOOP2)
+	@i
+	D=M // D=what in that address 16384
+	@variavel
+	D=M-D // D=24575-16384=8191
+	@FORA
+	D;JLE
+
+	@i
+	A=M
+	M=0 // "White" pixel
+	@i 
+	M=M+1
+	@LOOP2
+	0;JMP // Back to white loop
+
+
 (FORA)
 	@LOOP
 	0;JMP // Return to loop
