@@ -79,7 +79,6 @@ CHIP CPU {
     And(a=outZR, b=outNG, out=outAndZRNG);
     And(a=outNotZR, b=outNotNG, out=outAndNotZRNG);
 
-/*
     // JGT
     And(a=instruction[0], b=outAndNotZRNG, out=outJGT);
     And(a=outJGT, b=instruction[15], out=JGT);
@@ -92,43 +91,7 @@ CHIP CPU {
 
     // JUMP
     Or(a=JGT, b=JEQ, out=out01);
-    Or(a=out01, b=JLT, out=outJumpALU);
-*/
-    
-    // JGT
-    And(a=instruction[0], b=outAndNotZRNG, out=outJGT);
-    And(a=outJGT, b=instruction[15], out=JGT);
-    // JEQ
-    And(a=instruction[1], b=outZR, out=outJEQ);
-    And(a=outJEQ, b=instruction[15], out=JEQ);
-    // JGE
-    And(a=instruction[0], b=instruction[1], out=outJGEAux);
-    And(a=outJGEAux, b=outZR, out=outJGE);
-    And(a=outJGE, b=instruction[15], out=JGE);
-    // JLT
-    And(a=instruction[2], b=outNG, out=outJLT);
-    And(a=outJLT, b=instruction[15], out=JLT);
-    // JNE
-    And(a=instruction[0], b=instruction[2], out=outJNEAux);
-    And(a=outJNEAux, b=outAndNotZRNG, out=outJNE);
-    And(a=outJNE, b=instruction[15], out=JNE);
-    // JLE
-    And(a=instruction[1], b=instruction[2], out=outJLEAux);
-    And(a=outJLEAux, b=outAndZRNG, out=outJLE);
-    And(a=outJLE, b=instruction[15], out=JLE);
-    // JMP  
-    And(a=instruction[0], b=instruction[1], out=outAuxJMP);
-    And(a=outAuxJMP, b=instruction[2], out=outJMP);
-    And(a=outJMP, b=instruction[15], out=JMP);
-
-    // JUMP
-    Or(a=JGT, b=JEQ, out=out01);
- 	Or(a=out01, b=JGE, out=out012);
-    Or(a=out012, b=JLT, out=out0123);
-    Or(a=out0123, b=JNE, out=out01234);
-    Or(a=out01234, b=JLE, out=out012345);
-    Or(a=out012345, b=JMP, out=outJumpALU);
-    
+    Or(a=out01, b=JLT, out=outJumpALU); 
 
     // Inc do PC
     //Inc16(in=instruction, out=outInc);
